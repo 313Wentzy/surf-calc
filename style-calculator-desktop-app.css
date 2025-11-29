@@ -1,0 +1,2314 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    overflow-x: hidden;
+    font-family: 'Roboto', sans-serif;
+    /* Fallback to sans-serif if Roboto isn't available */
+    font-size: 16px;
+    /* Default font size */
+    letter-spacing: 0.5px;
+    /* Adjust as needed */
+
+    /* Improves readability */
+    color: #FFFFFF;
+    /* Text color (adjust based on your theme) */
+    /* Reset margin for consistent spacing */
+    /* Prevent horizontal scrolling */
+}
+
+.header_top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Changed from space-between to center */
+    width: 100%;
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    background: #0a1018cc !important;
+
+    /* Adjust the blur intensity as needed */
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+}
+
+.header-container {
+    margin-left: 1% !important;
+
+    /* Assume 15px is the left margin applied by `.container` */
+}
+
+#map {
+    width: 100vw;
+
+    /* 100% of the viewport width */
+    height: 100vh;
+
+    /* 100% of the viewport height */
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #27313F;
+
+    /* Actual color : #0a1018 */
+}
+
+.leaflet-control-zoom {
+    margin-top: 165% !important;
+}
+
+.leaflet-bar a {
+    background-color: #0a1018;
+    color: #ffffff;
+    border-bottom: 0;
+}
+
+#sidebar {
+    height: auto;
+
+    /* Allows the sidebar to grow based on content */
+    min-height: 100vh;
+    min-width: 400px;
+
+    /* Ensures it's never less than the viewport height */
+    width: 20vw;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: #0a1018cc !important;
+    transform: translateX(100%);
+    transition: transform 0.5s;
+    color: #ffffff;
+    z-index: 1000;
+    overflow-y: auto;
+    padding-left: 0.5%;
+}
+
+#sidebar .container {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.sidebar-content {
+    padding: 0px;
+    margin-top: 2%;
+    display: none;
+    overflow-x: hidden;
+
+    /* Initially hidden, shown by JS toggle */
+    transition: display 0.5s;
+
+    padding-right: 7px;
+}
+
+.custom-icon img {
+    /* Ensure the icon is centered for rotation */
+    transform-origin: center;
+}
+
+#toggle {
+    background-color: #ffe68d;
+
+    /* Primary color for the button */
+    border: none;
+
+    /* No border */
+    color: #0a1018;
+
+    /* Text color contrast */
+    padding: 10px 20px;
+    cursor: pointer;
+
+    /* Cursor changes to pointer to indicate it's clickable */
+    border-radius: 10px;
+
+    /* Rounded corners for the button */
+    font-weight: bold;
+    font-size: 17px;
+
+    /* Make button text bold */
+    transition: background-color 0.2s;
+
+    /* Smooth transition for hover effect */
+    margin-bottom: 10px;
+}
+
+#toggle:hover {
+    background-color: #577BFE;
+    color: #fff;
+
+    /* Secondary color on hover */
+}
+
+/* Card */
+/* Removes a border line going around it */
+body .card {
+    --bs-card-border-width: 0px !important;
+}
+
+body .border-secondary {
+    border-color: #ffffff !important;
+}
+
+.card-front {
+    background-color: #0a1018;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    margin-bottom: 5px;
+
+    /* Corner brackets styling */
+    border: 2px solid rgba(204, 204, 204, 0.15);
+    position: relative;
+}
+
+.card-front::before,
+.card-front::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border: 2px solid #ffe68d;
+    transition: all 0.2s ease;
+}
+
+.card-front::before {
+    top: -1px;
+    left: -1px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.card-front::after {
+    bottom: -1px;
+    right: -1px;
+    border-left: none;
+    border-top: none;
+}
+
+.card-front .layer {
+    position: relative;
+
+    /* Ensures corners are positioned relative to this container */
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    width: 100%;
+}
+
+.card-front .layer h1 {
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: -2px;
+    margin: 0 auto;
+    padding: 6px 18px 4px;
+    text-align: center;
+    color: inherit;
+
+    /* Inherits white color from the parent */
+}
+
+.card-front .layer .corner {
+    border-right: 4px solid #FFF;
+    border-top: 4px solid #FFF;
+    height: 20px;
+    position: absolute;
+    width: 20px;
+    display: none;
+}
+
+.card-front .layer .corner:nth-of-type(1) {
+    top: 0;
+    right: 0;
+}
+
+.card-front .layer .corner:nth-of-type(2) {
+    top: 0;
+    left: 0;
+    transform: rotateZ(-90deg);
+}
+
+.card-front .layer .corner:nth-of-type(3) {
+    bottom: 0;
+    left: 0;
+    transform: rotateZ(180deg);
+}
+
+.card-front .layer .corner:nth-of-type(4) {
+    bottom: 0;
+    right: 0;
+    transform: rotateZ(90deg);
+}
+
+@media (max-width: 768px) {
+    .card-front .layer .corner {
+        height: 15px;
+        width: 15px;
+    }
+
+    /* Hides the save droproutes button on mobile (Temp fix) */
+    .save-button {
+        display: none !important;
+    }
+}
+
+.nav {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    right: 0;
+    min-width: 0;
+
+    /* Changed from left to right */
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 250px;
+    background-color: #ff5964;
+    transform: translateX(100%);
+
+    /* Change translateX direction */
+    transition: transform 0.2s ease;
+    z-index: 1000;
+}
+
+.nav.open {
+    transform: translateX(0);
+    box-shadow: -5px 0 10px rgba(0, 0, 0, 0.25);
+
+    /* Invert shadow direction */
+}
+
+.nav_icon {
+    position: absolute;
+    display: flex;
+    flex-direction: row-reverse;
+
+    /* Reverse the order of flex items (icon comes before text) */
+    justify-content: center;
+    align-items: center;
+    top: 50%;
+    left: 0;
+
+    /* Changed from right to left and adjust the distance as needed */
+    width: 40px;
+    height: 40px;
+    border-radius: 10px 0 0 10px;
+
+    /* Adjust the border-radius */
+    /* Change border-right to border-left */
+    background-color: #ffe68d;
+    cursor: pointer;
+    box-shadow: 0px 0px 0px 8px #0a1018d4;
+
+    /* Invert shadow direction */
+    transform: translateY(-50%);
+    transition: all 0.5s;
+}
+
+.nav_icon:hover {
+    background-color: #577BFE;
+    box-shadow: none;
+}
+
+.nav_icon:hover>span {
+    color: #fff !important;
+}
+
+.nav_icon:hover>i {
+    color: #fff !important;
+}
+
+.nav_icon>i {
+    pointer-events: none;
+    padding-right: 5px;
+    color: #0a1018;
+    font-size: 1rem;
+    transition: transform 0.2s ease;
+}
+
+.nav_icon>i.rotate {
+    transform: rotate(-180deg);
+}
+
+.nav_icon>span {
+    pointer-events: none;
+    font-size: 0;
+    color: #0a1018;
+    transition: all 0.2s;
+}
+
+.nav_icon>.shape_container {
+    position: absolute;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    z-index: 1;
+}
+
+.nav_icon>.shape_container.bottom {
+    bottom: -20px;
+}
+
+.nav_icon>.shape_container.top {
+    top: -20px;
+    transform: rotateX(180deg);
+}
+
+.nav_icon>.shape_container>.icon_shape {
+    fill: #ffe68d;
+}
+
+.nav_icon.mouseDistance {
+    transition: all 0.2s, top 0s;
+}
+
+.nav_icon.mouseDistanceCloser {
+    height: 60px;
+    width: 60px;
+    left: -60px;
+    border-radius: 30px 0px 0px 30px;
+}
+
+.nav_icon.mouseDistanceCloser>.shape_container {
+    height: 40px;
+    width: 40px;
+}
+
+.nav_icon.mouseDistanceCloser>.shape_container.top {
+    top: -40px;
+}
+
+.nav_icon.mouseDistanceCloser>.shape_container.bottom {
+    bottom: -40px;
+}
+
+.nav_icon.mouseDistanceCloser>span {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.nav_icon.mouseDistanceCloser:hover>span {
+    color: #ffffff;
+}
+
+.nav_icon:hover>i {
+    color: #ffffff;
+}
+
+.nav_icon.mouseDistanceCloser>i {
+    font-size: 1.5rem;
+}
+
+#imageContainer {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+
+    /* Add overflow:hidden to hide content that extends beyond the container */
+}
+
+#mainImage,
+.bus-icon,
+.pin-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.bus-icon {
+    position: absolute;
+    top: 50%;
+
+    /* Adjust top and left values to position the icon */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 420px;
+
+    /* Adjust the width of the bus icon */
+    height: auto;
+
+    /* Maintain the aspect ratio */
+}
+
+.pin-icon {
+    /* Adjust the translation to center the icon vertically and position the anchor at the bottom middle */
+    left: 50%;
+
+    /* Center the icon horizontally */
+    bottom: 0;
+
+    /* Anchor the icon at the bottom */
+    /* Anchor the icon at the bottom */
+    width: 30px;
+
+    /* Adjust the width of the bus icon */
+    height: auto;
+
+    /* Maintain the aspect ratio */
+}
+
+#image-row.row {
+    --bs-gutter-x: 0;
+}
+
+.scrollable-content {
+    max-height: 100vh;
+
+    /* Maximum height of the viewport */
+    overflow-y: auto;
+
+    /* Enables vertical scrolling if content overflows */
+}
+
+.sidebar-content h2,
+.header_top h2,
+.sidebar-header h2 {
+    font-size: max(1.8vw, 25px) !important;
+}
+
+.col-auto h5 {
+    font-size: max(1.0vw, 15px) !important;
+}
+
+.container h6 {
+    font-size: max(1.0vw, 13px) !important;
+}
+
+.container {
+    padding-right: calc(var(--bs-gutter-x)* 0.3);
+    padding-left: calc(var(--bs-gutter-x)* 0.3);
+}
+
+.bg-dark.card {
+    width: 100%;
+
+    /* Full width */
+    margin: 0;
+
+    /* Consistent padding around the content */
+    box-sizing: border-box;
+
+    background-color: #0a101800 !important;
+
+    /* Include padding in width calculation */
+}
+
+/* Styles for the scrollbar track */
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #0a1018;
+}
+
+/* Styles for the scrollbar itself */
+::-webkit-scrollbar {
+    background-color: #0a1018;
+    padding-top: 1%;
+    border-radius: 0px 0px 10px 10px;
+    width: 5px;
+    right: 0px;
+
+}
+
+/* Styles for the draggable part of the scrollbar */
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #ffe68d;
+}
+
+.droproutes-heading {
+    position: absolute;
+
+    /* Adjusted for absolute positioning */
+    left: 20px;
+
+    /* Adjust spacing from the left edge */
+    white-space: nowrap;
+}
+
+.text-primary-group {
+    display: flex;
+    justify-content: space-evenly;
+
+    /* Updated to space elements evenly */
+    align-items: center;
+
+    /* Keeps items centered vertically */
+}
+
+.text-primary-group .text-primary {
+    margin: auto 20px;
+}
+
+.routes-sidebar {
+    z-index: 1000 !important;
+    position: absolute;
+    background-color: #0a1018d4 !important;
+    margin-top: 73px !important;
+    max-height: 500px;
+}
+
+.routes-sidebar-dropmap-gen {
+    z-index: 1000 !important;
+    position: absolute;
+    background-color: rgba(35, 31, 32, 0.9) !important;
+    margin-top: 73px !important;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    max-height: 500px;
+}
+
+#content {
+    transition: max-height 0.4s;
+    overflow: hidden;
+    max-height: 500px;
+
+    /* Start expanded */
+}
+
+#content.collapsed {
+    overflow: hidden;
+    max-height: 0;
+
+    /* Start with zero height */
+}
+
+.row .btn-group-vertical,
+.row .chests-text {
+    width: auto;
+    margin-bottom: 10px;
+
+    /* Allows the group to only take up as much width as it needs */
+}
+
+.row .chest-img {
+    width: auto;
+    margin-bottom: 8px;
+    margin-top: 4px;
+}
+
+.row .close-expand {
+    width: auto;
+    margin-bottom: 10px;
+    position: relative;
+    margin-left: auto;
+    margin-right: 15px;
+    border-radius: 10px;
+    border-width: 2px;
+}
+
+.cluster-marker {
+    background-size: cover;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.cluster-marker span {
+    background: #0a1018;
+    color: white;
+    border-radius: 10px;
+    padding: 2px 5px;
+}
+
+.map-marker {
+    cursor: default !important;
+}
+
+.btn-group-vertical>.btn,
+.btn-group-vertical>.btn-group {
+    margin-top: 2px !important;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-width: 2px;
+
+    /* Adjust to suit, ensuring there is no overlap */
+}
+
+.save-button {
+    position: fixed;
+    z-index: 1000;
+    bottom: 40px;
+
+    /* Distance from the bottom of the viewport */
+    left: 20px;
+    font-weight: bold;
+    color: #393636;
+    border-radius: 10px;
+}
+
+.modal .modal-header,
+.modal .modal-footer {
+    --bs-modal-header-border-color: transparent;
+    --bs-modal-footer-border-color: transparent;
+    border-top-left-radius: 33px;
+}
+
+.modal .modal-dialog {
+    --bs-modal-margin: 10%;
+}
+
+.modal .form-control {
+    border: 4px solid #ffea9c;
+    background-clip: unset !important;
+}
+
+.pulse {
+    animation: pulse-animation 1.75s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-animation {
+    0% {
+        box-shadow: 0 0 0 0px rgba(254, 218, 87, 0.9);
+        /* Bright start */
+    }
+
+    50% {
+        box-shadow: 0 0 5px 7px rgba(254, 218, 87, 0.4);
+        /* Midpoint glow */
+    }
+
+    100% {
+        box-shadow: 0 0 0 10px rgba(0, 255, 255, 0);
+        /* Fades out completely */
+    }
+}
+
+
+.calculate-button {
+    position: fixed;
+    z-index: 1000;
+    bottom: 40px;
+    background-color: #ffe68d;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
+    padding: max(0.5%, 15px) max(1.8%, 30px);
+    text-align: center;
+    font-size: max(1.2vw, 15px) !important;
+    border-radius: 30px 30px 10px 10px;
+}
+
+.custom-modal-width {
+    --bs-modal-width: 50% !important;
+
+    /* Adjust this value as needed */
+}
+
+/* Manual height adjustment slider */
+.slider-container {
+    width: 300px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.custom-slider {
+    -webkit-appearance: none;
+
+    width: 100%;
+    height: 2px;
+    background: #ddd;
+    color: #ffe68d;
+    outline: none;
+    transition: opacity .2s;
+}
+
+.custom-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #FFA400;
+    border: 3px solid #FFFFFF;
+    cursor: pointer;
+}
+
+.custom-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #FFA400;
+    border: 3px solid #FFFFFF;
+    cursor: pointer;
+}
+
+.custom-slider2,
+.custom-slider3,
+.custom-slider4 {
+    -webkit-appearance: none;
+
+    width: 100%;
+    height: 2px;
+    background: #ddd;
+    color: #ffe68d;
+    outline: none;
+    transition: opacity .2s;
+}
+
+.custom-slider2::-webkit-slider-thumb,
+.custom-slider3::-webkit-slider-thumb,
+.custom-slider4::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #9000FF;
+    border: 3px solid #FFFFFF;
+    cursor: pointer;
+}
+
+.custom-slider3::-webkit-slider-thumb {
+    background: #00baff;
+}
+
+.custom-slider4::-webkit-slider-thumb {
+    background: #ff5757;
+}
+
+.custom-slider2::-moz-range-thumb,
+.custom-slider3::-moz-range-thumb,
+.custom-slider4::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #9000FF;
+    border: 3px solid #FFFFFF;
+    cursor: pointer;
+}
+
+.custom-slider3::-moz-range-thumb {
+    background: #00baff;
+}
+
+.custom-slider4::-moz-range-thumb {
+    background: #ff5757;
+}
+
+.slider-marks {
+    position: relative;
+    width: 100%;
+    height: 20px;
+    margin-top: 5px;
+}
+
+.mark {
+    position: absolute;
+    width: 2px;
+    height: 10px;
+    background-color: #888;
+    top: 0;
+    padding: 0 !important;
+}
+
+.mark-label {
+    position: absolute;
+    top: 12px;
+    transform: translateX(-50%);
+    font-size: 12px;
+}
+
+input[type="height_number"] {
+    width: 50px;
+    border: 0;
+    background-color: #ffe68d;
+    color: #0a1018;
+    text-align: center;
+    font-weight: 500;
+    border-radius: 6px;
+    margin-bottom: 5px;
+}
+
+input[type="height_number2"],
+input[type="height_number3"],
+input[type="height_number4"] {
+    width: 50px;
+    border: 0;
+    background-color: #9000FF;
+    color: white;
+    text-align: center;
+    font-weight: 500;
+    border-radius: 6px;
+    margin-bottom: 5px;
+}
+
+input[type="height_number3"] {
+    background-color: #00baff;
+}
+
+input[type="height_number4"] {
+    background-color: #ff5757;
+}
+
+/* Reset button */
+.reset-button-pressed {
+    background-color: #ffe68d !important;
+    color: #0a1018 !important;
+    border: 1px solid #ffe68d !important;
+}
+
+input[type="number"] {
+    margin: 5px 0;
+}
+
+.leaflet-popup-content-wrapper {
+    background-color: #0a1018 !important;
+    /* Set background color */
+    color: #fff !important;
+    /* Set text color */
+    border: none !important;
+    /* Remove border */
+    border-radius: 10px;
+    /* Rounded edges */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    /* Add subtle shadow */
+}
+
+.leaflet-popup-tip {
+    background: #0a1018 !important;
+    /* Match tip background with popup */
+}
+
+.leaflet-popup-content {
+    margin: 0 !important;
+    /* Remove default margin */
+    padding: 10px 15px !important;
+    /* Add custom padding */
+    font-size: 14px !important;
+    /* Adjust text size */
+    line-height: 1.4 !important;
+    /* Improve readability */
+}
+
+
+
+/* Notifications */
+
+/* Notification container */
+#notification-container {
+    position: fixed;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Notification style */
+.notification {
+    background-color: #0a1018;
+    color: white;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    min-width: 300px;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transform: translateY(0);
+    animation: slideDown 0.3s forwards;
+    overflow: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    /* Smooth transition for both */
+}
+
+/* Animation for notification appearing */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Close button */
+.notification .close-btn2 {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: transparent;
+    border: none;
+    color: #ffe68d;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Progress bar */
+.notification .progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background-color: #ffe68d;
+    animation: progressBar linear forwards;
+}
+
+@keyframes progressBar {
+    from {
+        width: 100%;
+    }
+
+    to {
+        width: 0%;
+    }
+}
+
+/* Loading notification */
+.notification.loading {
+    display: flex;
+    align-items: center;
+}
+
+/* Icon container with fixed size */
+.notification.loading .icon-container {
+    position: relative;
+    width: 24px;
+    /* Set a fixed width */
+    height: 24px;
+    /* Set a fixed height */
+    margin-right: 15px;
+}
+
+/* Position spinner and checkmark absolutely */
+.notification.loading .spinner,
+.notification.loading .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* They will fit within the icon container */
+    height: 100%;
+}
+
+/* Spinner styles */
+.notification.loading .spinner {
+    border: 4px solid #ffe68d;
+    border-top: 4px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Spinner visibility */
+.notification.loading.done .spinner {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Checkmark icon */
+.notification.loading .checkmark {
+    display: none;
+    -ms-transform: rotate(45deg);
+    /* IE 9 */
+    -webkit-transform: rotate(45deg);
+    /* Chrome, Safari, Opera */
+    transform: rotate(45deg);
+    /* Hidden initially */
+}
+
+.notification.loading.done .checkmark {
+    display: block;
+    animation: fadeIn 0.3s ease forwards;
+}
+
+/* Checkmark parts */
+.notification.loading .checkmark_stem,
+.notification.loading .checkmark_kick {
+    position: absolute;
+    background-color: #ffe68d;
+}
+
+/* Adjusted positions for the checkmark */
+.notification.loading .checkmark_stem {
+    width: 4.5px;
+    height: 15px;
+    left: 11px;
+    top: 5px;
+}
+
+.notification.loading .checkmark_kick {
+    width: 7px;
+    height: 4.5px;
+    left: 5px;
+    top: 15px;
+}
+
+/* Smoother removal animation */
+.notification.hide {
+    animation: fadeOut 0.3s ease forwards;
+    /* Gradually fades out */
+}
+
+/* Fade-in animation for the checkmark */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+/* Spinner animation */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+
+/* Smooth Full Rainbow Animation starting and ending in White */
+@keyframes smoothFullRainbow {
+    0% {
+        fill: #FFAE00;
+        /* Start with fill color */
+    }
+
+    16% {
+        fill: #b6d7a8;
+        /* Pastel green */
+    }
+
+    33% {
+        fill: #a2c4c9;
+        /* Pastel teal */
+    }
+
+    50% {
+        fill: #b4a7d6;
+        /* Pastel lavender */
+    }
+
+    66% {
+        fill: #d5a6bd;
+        /* Pastel pink */
+    }
+
+    83% {
+        fill: #ffe599;
+        /* Pastel yellow */
+    }
+
+    100% {
+        fill: #FFAE00;
+        /* End with fill color */
+    }
+}
+
+.rainbow-effect-full {
+    animation: smoothFullRainbow 1s ease-in-out infinite;
+    /* Smooth transitions and longer duration */
+}
+
+
+
+
+/* Chest Switches Styling */
+.chest-switches {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.chest-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 150px;
+    /* Adjust based on layout */
+}
+
+/* Chest Icon */
+.chest-img {
+    margin-right: 10px;
+}
+
+/* Material Design Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: #0a1018;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: #ffe68d;
+    /* Material Design blue */
+}
+
+input:checked+.slider:before {
+    transform: translateX(20px);
+}
+
+#resetButton:not(:active) {
+    background-color: #ffe68d !important;
+}
+
+#resetButton:hover {
+    background-color: #577BFE !important;
+    color: #fff !important;
+}
+
+/* Floating Slider Container */
+#floating-slider-container {
+    position: fixed;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    user-select: none;
+}
+
+/* Floating Slider Track */
+#floating-slider-track {
+    position: relative;
+    width: 80px;
+    /* Collapsed width */
+    height: 30px;
+    background: #0a1018d4;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+/* Expanded State on Hover */
+#floating-slider-container:hover #floating-slider-track {
+    width: 350px;
+    height: 50px;
+    justify-content: space-between;
+    /* Even spacing in expanded state */
+}
+
+/* Floating Slider Toggle (Active Selection Indicator) */
+#floating-slider-toggle {
+    position: absolute;
+    width: 25%;
+    /* Fill one segment */
+    height: 100%;
+    /* Fill track height */
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 25px;
+    /* Match the track corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: left 0.3s ease, transform 0.3s ease;
+    z-index: 10;
+}
+
+/* Collapsed State Toggle Center Alignment */
+#floating-slider-track.collapsed {
+    width: 80px;
+    justify-content: center;
+    /* Center active selection */
+}
+
+/* Floating Slider Options */
+.floating-slider-option {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.1s ease, transform 0.1s ease;
+    transform: scale(0.8);
+    z-index: 10;
+}
+
+/* Show options on hover */
+#floating-slider-container:hover .floating-slider-option {
+    opacity: 1;
+}
+
+
+/* Highlight Active Option */
+.floating-slider-option.active {
+    opacity: 1;
+    transform: scale(0.9);
+}
+
+/* Adjust individual option placement in expanded mode */
+.floating-slider-option-1 {
+    left: 0%;
+}
+
+.floating-slider-option-2 {
+    left: 25%;
+}
+
+.floating-slider-option-3 {
+    left: 50%;
+}
+
+.floating-slider-option-4 {
+    left: 75%;
+}
+
+/* Collapsed State - Show Only Active Option */
+#floating-slider-track.collapsed .floating-slider-option {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    /* Smooth transitions */
+
+}
+
+#floating-slider-track.collapsed .floating-slider-option-1.active {
+    opacity: 1;
+    position: fixed;
+    transform: scale(1) translateX(170%);
+}
+
+#floating-slider-track.collapsed .floating-slider-option-2.active {
+    opacity: 1;
+    position: fixed;
+    transform: scale(1) translateX(10%);
+
+}
+
+#floating-slider-track.collapsed .floating-slider-option-3.active {
+    opacity: 1;
+    position: fixed;
+    transform: scale(1) translateX(-50%);
+
+}
+
+#floating-slider-track.collapsed .floating-slider-option-4.active {
+    opacity: 1;
+    position: fixed;
+    transform: scale(1) translateX(-77%);
+}
+
+#floating-slider-track.collapsed #floating-slider-toggle {
+    transform: scale(0);
+}
+
+/* Wrapper for icons on the right side */
+.icon-wrapper {
+    width: 18px;
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* --- Flight chart container --- */
+.chart-wrapper {
+    width: 100%;
+    max-width: 100%;
+    height: 260px;
+}
+
+@media (max-width: 1200px) {
+    .chart-wrapper {
+        height: 220px;
+    }
+}
+
+@media (max-width: 768px) {
+    .chart-wrapper {
+        height: 200px;
+    }
+}
+
+/* Tooltips look good on dark theme out of the box, but ensure contrast */
+.chartjs-tooltip-key {
+    border-radius: 3px;
+}
+
+
+/* For Chest spawns checkboxes */
+.custom-checkbox {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+}
+
+.custom-checkbox input[type="checkbox"] {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+    pointer-events: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.checkbox-visual {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background-color: #0a1018;
+    border: 2px solid #cccccc;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.custom-checkbox input[type="checkbox"]:checked~.checkbox-visual {
+    background-color: #ffe68d;
+    border-color: #ffe68d;
+}
+
+.checkbox-visual::after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 5px;
+    top: 1px;
+    width: 6px;
+    height: 12px;
+    border: solid #0a1018;
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg);
+}
+
+.custom-checkbox input[type="checkbox"]:checked~.checkbox-visual::after {
+    display: block;
+}
+
+
+.info-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 12px;
+    border-radius: 6px;
+    border: 2px solid rgba(204, 204, 204, 0.15);
+}
+
+.info-item .info-value {
+    color: #ffe68d;
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.info-item .info-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: #cccccc;
+    margin-bottom: 4px;
+}
+
+.card-hover-effect {
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+
+.card-hover-effect:hover {
+    border-color: rgba(255, 230, 141, 0.25);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+.card-hover-effect:hover::before,
+.card-hover-effect:hover::after {
+    border-color: #ffeeb3;
+    width: 16px;
+    height: 16px;
+}
+
+/* If you have all 4 corners, add this too */
+.card-hover-effect:hover .corner-tr,
+.card-hover-effect:hover .corner-bl {
+    border-color: #ffeeb3;
+    width: 16px;
+    height: 16px;
+}
+
+.info-box-hover-effect {
+    transition: all 0.1s ease;
+    cursor: pointer;
+}
+
+.info-box-hover-effect:hover {
+    border-color: rgba(255, 230, 141, 0.3);
+    background: #0a1018;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px 15px;
+    border-radius: 6px;
+    flex: 0 1 auto;
+    cursor: pointer;
+    user-select: none;
+    border: 2px solid rgba(204, 204, 204, 0.15);
+}
+
+/* === NEW STYLES TO ADD AFTER EXISTING CSS === */
+
+/* Fix for map zooming issue */
+#map {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #27313F;
+    overflow: hidden; /* Prevent overflow issues */
+}
+
+.leaflet-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Desktop Icon (Floating Action Button) */
+.desktop-icon {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #2f80ed 0%, #1e63cc 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    cursor: move;
+    z-index: 9998;
+    box-shadow: 0 4px 20px rgba(47, 128, 237, 0.4);
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.desktop-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 30px rgba(47, 128, 237, 0.6);
+}
+
+.desktop-icon:active {
+    transform: scale(0.95);
+}
+
+.desktop-icon.dragging {
+    transition: none;
+    opacity: 0.8;
+}
+
+/* Agent Window */
+.agent-window {
+    position: fixed;
+    width: 600px;
+    height: 400px;
+    min-width: 500px;
+    min-height: 300px;
+    background: linear-gradient(135deg, rgba(10, 16, 24, 0.98) 0%, rgba(15, 23, 34, 0.98) 100%);
+   /* backdrop-filter: blur(20px); */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    animation: windowOpen 0.3s ease;
+}
+
+@keyframes windowOpen {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Window Header */
+.window-header {
+    height: 40px;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    cursor: move;
+    user-select: none;
+}
+
+.window-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.window-title i {
+    font-size: 16px;
+    color: #2f80ed;
+}
+
+/* Status Indicator in Window Header */
+.window-header .status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: 15px;
+    padding: 4px 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #dc3545;
+}
+
+.status-indicator.connected .status-dot {
+    background: #28a745;
+    box-shadow: 0 0 10px #28a745;
+    animation: pulse 2s infinite;
+}
+
+.status-indicator.connecting .status-dot {
+    background: #ffc107;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.status-text {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Window Close Button */
+.window-close {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.window-close:hover {
+    background: rgba(255, 87, 87, 0.2);
+    color: #ff5757;
+}
+
+/* Window Content */
+.window-content {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    padding: 15px;
+    gap: 15px;
+}
+
+/* Left Panel */
+.window-left-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* Right Panel - Activity Log */
+.window-right-panel {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    padding-left: 15px;
+}
+
+.window-right-panel h4 {
+    margin: 0 0 10px 0;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Control Sections */
+.control-section {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.control-section h4 {
+    margin: 0 0 12px 0;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Button Row */
+.button-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+/* Agent Buttons */
+.agent-btn {
+    flex: 1;
+    padding: 8px 12px;
+    background: linear-gradient(135deg, #2f80ed 0%, #1e63cc 100%);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.agent-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #4090ff 0%, #2f80ed 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(47, 128, 237, 0.3);
+}
+
+.agent-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.agent-btn:disabled {
+    background: rgba(255, 255, 255, 0.1);
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* Agent Select */
+.agent-select {
+    width: 100%;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    color: white;
+    font-size: 13px;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.agent-select:focus {
+    border-color: #2f80ed;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.agent-select option {
+    background: #0a1018;
+    color: white;
+}
+
+/* Log Area */
+.log-area {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    padding: 10px;
+    overflow-y: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+/* Log Scrollbar */
+.log-area::-webkit-scrollbar {
+    width: 6px;
+}
+
+.log-area::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+}
+
+.log-area::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+
+.log-area::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Log Entry */
+.log-entry {
+    margin-bottom: 3px;
+    padding: 2px 0;
+    border-left: 2px solid transparent;
+    padding-left: 6px;
+}
+
+.log-entry.log {
+    border-left-color: #2f80ed;
+}
+
+.log-entry.warn {
+    border-left-color: #ffc107;
+}
+
+.log-entry.err {
+    border-left-color: #dc3545;
+}
+
+.log-time {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 10px;
+}
+
+.log-tag {
+    font-weight: bold;
+    color: #2f80ed;
+    font-size: 10px;
+}
+
+.log-tag.warn {
+    color: #ffc107;
+}
+
+.log-tag.err {
+    color: #dc3545;
+}
+
+/* Window Resize Handle */
+.window-resize-handle {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    cursor: nwse-resize;
+    background: linear-gradient(135deg, transparent 50%, rgba(255, 255, 255, 0.1) 50%);
+    border-radius: 0 0 12px 0;
+}
+
+/* Notification System */
+.notification-container {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 10001;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.notification {
+    min-width: 300px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, rgba(10, 16, 24, 0.95) 0%, rgba(15, 23, 34, 0.95) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 3px solid #2f80ed;
+    border-radius: 6px;
+    color: white;
+    font-size: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    animation: slideInRight 0.3s ease;
+    pointer-events: auto;
+}
+
+.notification.success {
+    border-left-color: #28a745;
+}
+
+.notification.warning {
+    border-left-color: #ffc107;
+}
+
+.notification.error {
+    border-left-color: #dc3545;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+.notification.fade-out {
+    animation: slideOutRight 0.3s ease;
+}
+
+/* Auth Modal (keep existing but ensure proper z-index) */
+.auth-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10002;
+}
+
+.auth-modal-overlay.show {
+    display: flex;
+}
+
+.auth-modal {
+    background: white;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 480px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.auth-modal-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.auth-modal-header h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #202124;
+    font-weight: 500;
+}
+
+.auth-modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #5f6368;
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+
+.auth-modal-close:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.auth-modal-body {
+    padding: 24px;
+}
+
+.auth-modal-body p {
+    margin: 0 0 20px 0;
+    color: #5f6368;
+    font-size: 14px;
+}
+
+.auth-modal-info {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.auth-modal-info label {
+    display: flex;
+    align-items: center;
+    color: #202124;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.auth-modal-info input[type="checkbox"] {
+    margin-right: 12px;
+}
+
+.auth-modal-footer {
+    padding: 16px 24px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.auth-btn-primary {
+    background: #1a73e8;
+    color: white;
+    border: none;
+    padding: 8px 24px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.auth-btn-primary:hover {
+    background: #1765d6;
+}
+
+.auth-btn-secondary {
+    background: white;
+    color: #1a73e8;
+    border: 1px solid #dadce0;
+    padding: 8px 24px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.auth-btn-secondary:hover {
+    background: #f8f9fa;
+    border-color: #1a73e8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .agent-window {
+        width: 90%;
+        height: 70%;
+        min-width: 320px;
+        left: 5% !important;
+        top: 15% !important;
+    }
+    
+    .window-content {
+        flex-direction: column;
+    }
+    
+    .window-right-panel {
+        width: 100%;
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        padding-left: 0;
+        padding-top: 15px;
+        max-height: 150px;
+    }
+}
+
+/* Prevent text selection during dragging */
+.no-select {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+/* Ensure map doesn't interfere with UI elements */
+.leaflet-control-container {
+    pointer-events: none;
+}
+
+.leaflet-control-container > * {
+    pointer-events: auto;
+}
+
+/* === FINAL CSS ADJUSTMENTS - Add these to your existing CSS === */
+
+/* Fix z-index hierarchy to prevent overlaps */
+#map {
+    z-index: 1;
+}
+
+/* Desktop Icon positioning fix */
+.desktop-icon {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000; /* Above map but below window */
+}
+
+/* Agent Window proper z-index */
+.agent-window {
+    z-index: 1001; /* Above desktop icon */
+}
+
+/* Ensure sidebar and menu don't conflict */
+#nav {
+    z-index: 999; /* Below desktop icon and window */
+}
+
+#sidebar {
+    z-index: 998; /* Below nav */
+}
+
+/* Notification container above everything except modals */
+.notification-container {
+    z-index: 1002;
+}
+
+/* Auth modal highest priority */
+.auth-modal-overlay {
+    z-index: 10000;
+}
+
+/* Fix the solve button positioning */
+.calculate-button {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 997;
+}
+
+/* Ensure floating slider doesn't interfere */
+#floating-slider-container {
+    z-index: 996;
+}
+
+/* Routes sidebar positioning */
+.routes-sidebar {
+    z-index: 995;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Make sure the window header is draggable */
+.agent-window .window-header {
+    cursor: move;
+    -webkit-app-region: drag; /* For Electron apps */
+}
+
+.agent-window .window-header button,
+.agent-window .window-header .status-indicator {
+    cursor: default;
+    -webkit-app-region: no-drag;
+}
+
+/* Smooth transitions for window show/hide */
+.agent-window {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.agent-window[style*="display: none"] {
+    opacity: 0;
+    transform: scale(0.95);
+}
+
+/* Better scrollbar for activity log */
+.log-area::-webkit-scrollbar {
+    width: 6px;
+    background: transparent;
+}
+
+.log-area::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+}
+
+.log-area::-webkit-scrollbar-thumb {
+    background: rgba(47, 128, 237, 0.3);
+    border-radius: 3px;
+}
+
+.log-area::-webkit-scrollbar-thumb:hover {
+    background: rgba(47, 128, 237, 0.5);
+}
+
+/* Ensure buttons don't overlap in the agent window */
+.agent-window .button-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: nowrap;
+}
+
+.agent-window .agent-btn {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Fix any potential header overlap issues */
+.header_top {
+    z-index: 994;
+}
+
+/* Ensure proper stacking for all map controls */
+.leaflet-control-container {
+    z-index: 400; /* Leaflet default, below our UI */
+}
+
+/* Desktop icon hover effect improvement */
+.desktop-icon {
+    animation: subtle-glow 3s ease-in-out infinite;
+}
+
+@keyframes subtle-glow {
+    0%, 100% {
+        box-shadow: 0 4px 20px rgba(47, 128, 237, 0.4);
+    }
+    50% {
+        box-shadow: 0 4px 25px rgba(47, 128, 237, 0.6);
+    }
+}
+
+/* Ensure notification doesn't go off-screen */
+.notification-container {
+    max-width: 400px;
+    right: 20px;
+}
+
+.notification {
+    word-wrap: break-word;
+}
+
+/* Fix potential console error message display */
+.log-entry.err {
+    background: rgba(220, 53, 69, 0.1);
+    border-left: 3px solid #dc3545;
+    padding-left: 8px;
+    margin: 2px 0;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .desktop-icon {
+        bottom: 80px; /* Above solve button on mobile */
+    }
+    
+    .agent-window {
+        width: 90% !important;
+        height: 60% !important;
+        left: 5% !important;
+        top: 20% !important;
+    }
+    
+    .agent-window .window-content {
+        flex-direction: column;
+    }
+    
+    .agent-window .window-right-panel {
+        width: 100%;
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        padding-top: 10px;
+        max-height: 120px;
+    }
+}
